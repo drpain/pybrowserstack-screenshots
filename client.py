@@ -115,7 +115,7 @@ def _mkdir(path):
 def _download_file(uri, filename):
     try:
         with open(filename, 'wb') as handle:
-            request = requests.get(uri, stream=True)
+            request = requests.get(uri, stream=True, max_retries=10, dely_between_retries=3)
             for block in request.iter_content(1024):
                 if not block:
                     break
